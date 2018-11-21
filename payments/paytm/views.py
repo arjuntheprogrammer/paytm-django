@@ -19,8 +19,10 @@ def home(request):
 def payment(request):
     MERCHANT_KEY = settings.PAYTM_MERCHANT_KEY
     MERCHANT_ID = settings.PAYTM_MERCHANT_ID
-    get_lang = "/" + get_language() if get_language() else ''
+    # get_lang = "/" + get_language() if get_language() else ''
+    get_lang = ""
     CALLBACK_URL = settings.HOST_URL + get_lang + settings.PAYTM_CALLBACK_URL
+    print("CALLBACK_URL", CALLBACK_URL)
     # Generating unique temporary ids
     order_id = Checksum.__id_generator__()
 
@@ -34,7 +36,7 @@ def payment(request):
                     'INDUSTRY_TYPE_ID':'Retail',
                     'WEBSITE': settings.PAYTM_WEBSITE,
                     'CHANNEL_ID':'WEB',
-                    #'CALLBACK_URL':CALLBACK_URL,
+                    'CALLBACK_URL':CALLBACK_URL,
                 }
         param_dict = data_dict
         param_dict['CHECKSUMHASH'] = Checksum.generate_checksum(data_dict, MERCHANT_KEY)
@@ -49,8 +51,12 @@ def response(request):
         data_dict = {}
         for key in request.POST:
             data_dict[key] = request.POST[key]
+            # print("key, request.POST[key] = ", key, request.POST[key])
         verify = Checksum.verify_checksum(data_dict, MERCHANT_KEY, data_dict['CHECKSUMHASH'])
         if verify:
+            for key in data_dict:
+                if data_dict[key] == "":
+                    data_dict[key] = None
             PaytmHistory.objects.create(user=request.user, **data_dict)
             return render(request,"response.html",{"paytm":data_dict})
         else:

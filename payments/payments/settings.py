@@ -25,7 +25,7 @@ SECRET_KEY = '9q$ntg=n=j*w1n9i3hya-5so*8@!nl1#-z#u-o6-46tp$7k6s$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -57,7 +57,7 @@ ROOT_URLCONF = 'payments.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ["templates"],
+        'DIRS': ["payments/templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -89,13 +89,14 @@ DATABASES = {
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
@@ -109,13 +110,22 @@ HOST_URL = "http://localhost:8080"
 PAYTM_CALLBACK_URL = "/paytm/response/"
 
 if DEBUG:
-    PAYTM_MERCHANT_KEY = "xxxx"
-    PAYTM_MERCHANT_ID = "xxxx"
+    PAYTM_MERCHANT_KEY = "bKMfNxPPf_QdZppa"
+    PAYTM_MERCHANT_ID = "DIY12386817555501617"
     PAYTM_WEBSITE = 'WEB_STAGING'
+    # PAYTM_MERCHANT_KEY = "xxxx"
+    # PAYTM_MERCHANT_ID = "xxxx"
+    # PAYTM_WEBSITE = 'WEB_STAGING'
     HOST_URL = 'http://localhost:8000'
     '''
     In sandbox enviornment you can use following wallet credentials to login and make payment.
     Mobile Number : 7777777777
     Password : Paytm12345
+    
+    This should redirect you to Paytm Page.
+    Test Credentials to use for login:
+    Mobile Number - 7777777777
+    Password - Paytm12345
+    OTP - 489871
     This test wallet is topped-up to a balance of 7000 Rs. every 5 minutes.
     '''
