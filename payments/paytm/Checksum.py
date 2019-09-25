@@ -18,7 +18,7 @@ def generate_checksum(param_dict, merchant_key, salt=None):
     hasher = hashlib.sha256(final_string.encode())
     hash_string = hasher.hexdigest()
 
-    hash_string += salt
+    hash_string += salt.encode()
 
     return __encode__(hash_string, IV, merchant_key)
 

@@ -1,2 +1,4 @@
 /paytm
 *.pyc
+.vscode
+.vscode/settings.json

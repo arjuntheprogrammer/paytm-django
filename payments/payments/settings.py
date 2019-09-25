@@ -57,7 +57,7 @@ ROOT_URLCONF = 'payments.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ["payments/templates"],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -104,19 +104,20 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 
-PAYTM_MERCHANT_KEY = ""
-PAYTM_MERCHANT_ID = ""
-HOST_URL = "http://localhost:8080"
+PAYTM_MERCHANT_KEY = "cI8FOVc9dyHFlqkj"
+PAYTM_MERCHANT_ID = "GxOFdj23537389093027"
+PAYTM_WEBSITE = 'WEBSTAGING'
+PAYTM_CHANNEL_ID = "WEB"
+HOST_URL = "http://10.54.3.75:9000"
 PAYTM_CALLBACK_URL = "/paytm/response/"
+CHANNEL_ID = "WEB"
 
 if DEBUG:
-    PAYTM_MERCHANT_KEY = "bKMfNxPPf_QdZppa"
-    PAYTM_MERCHANT_ID = "DIY12386817555501617"
-    PAYTM_WEBSITE = 'WEB_STAGING'
-    # PAYTM_MERCHANT_KEY = "xxxx"
-    # PAYTM_MERCHANT_ID = "xxxx"
-    # PAYTM_WEBSITE = 'WEB_STAGING'
-    HOST_URL = 'http://localhost:8000'
+    PAYTM_MERCHANT_KEY = "cI8FOVc9dyHFlqkj"
+    PAYTM_MERCHANT_ID = "GxOFdj23537389093027"
+    PAYTM_WEBSITE = 'WEBSTAGING'
+    PAYTM_CHANNEL_ID = "WEB"
+    HOST_URL = 'http://10.54.3.75:9000'
     '''
     In sandbox enviornment you can use following wallet credentials to login and make payment.
     Mobile Number : 7777777777
